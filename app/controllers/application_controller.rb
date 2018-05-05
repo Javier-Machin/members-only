@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   def log_in(user)
     session[:user_id] = user.id
-    current_user(user.id)
+    current_user
   end
   
   def current_user=(user)
@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def log_out
-    forget(current_user)
     cookies.delete(:remember_token)
     current_user = nil
   end
