@@ -1,0 +1,8 @@
+<ul class="users">
+  <% @posts.each do |post| %>
+    <li><%= post.body %></li>
+    <% if cookies[:user_id] %>
+      <li><%= post.user.name %></li>
+    <% end %>
+  <% end %>
+</ul>

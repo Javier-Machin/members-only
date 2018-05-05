@@ -1,0 +1,10 @@
+<%= form_for(@post) do |f| %>
+  <%= f.label :body, 'Post text: ' %> 
+  <%= f.text_area :body, size: "25x10" %>
+  <%= f.submit "Submit" %>
+<% end %>
+<ul>
+  <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>

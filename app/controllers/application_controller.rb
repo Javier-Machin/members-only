@@ -2,21 +2,23 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def log_in(user)
-    session[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
+    cookies.permanent[:user_id] = user.id
     current_user
   end
   
-  def current_user=(user)
-    current_user = user 
+  def current_user
+    @current_user ||= User.find_by(remember_token: cookies[:remember_token])
   end
 
-  def current_user
-    current_user ||= User.find_by(remember_token: cookies[:remember_token])
+  def current_user?(user)
+    user == @current_user
   end
 
   def log_out
     cookies.delete(:remember_token)
-    current_user = nil
+    cookies.delete(:user_id)
+    @current_user = nil
   end
 
 end
