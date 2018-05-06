@@ -1,8 +1,8 @@
 <ul class="users">
   <% @posts.each do |post| %>
     <li><%= post.body %></li>
-    <% if cookies[:user_id] %>
-      <li><%= post.user.name %></li>
+    <% if logged_in? %>
+      <p>Author: <%= post.user.name %></p>
     <% end %>
   <% end %>
 </ul>

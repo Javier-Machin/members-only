@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    @post = Post.new(user_id: cookies[:user_id], body: params[:post][:body])
+    @post = Post.new(user_id: cookies.signed[:user_id], body: params[:post][:body])
     if @post.save
       redirect_to posts_path
     else
